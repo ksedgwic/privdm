@@ -9,7 +9,7 @@ use nostr_sdk::prelude::*;
 async fn main() -> Result<()> {
     let mut to = None;
     let mut via = None;
-    let mut sec_file = None;
+    let mut from = None;
     let args: Vec<String> = env::args().collect();
     let mut i = 1;
     while i < args.len() {
@@ -29,7 +29,7 @@ async fn main() -> Result<()> {
             "--from" => {
                 i += 1;
                 if i < args.len() {
-                    sec_file = Some(args[i].clone());
+                    from = Some(args[i].clone());
                 }
             }
             _ => {}
@@ -39,10 +39,10 @@ async fn main() -> Result<()> {
 
     let to = to.expect("missing --to");
     let via = via.expect("missing --via");
-    let sec_file = sec_file.expect("missing --sec-file");
+    let from = from.expect("missing --from");
 
     // Read secret key from file
-    let secret = fs::read_to_string(sec_file)?.trim().to_owned();
+    let secret = fs::read_to_string(from)?.trim().to_owned();
     let secret_key = SecretKey::from_str(&secret)?;
     let keys = Keys::new(secret_key);
     let client = Client::new(keys);
