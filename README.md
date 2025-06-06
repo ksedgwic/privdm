@@ -11,7 +11,8 @@ echo "hello world" | \
     --from sample.key \
     --to <RECIPIENT_PUBLIC_KEY|RECIPIENT_NPUB> \
     --via <RELAY_URL_1> \
-    --via <RELAY_URL_2>
+    --via <RELAY_URL_2> \
+    --cc <SENDERS_RELAY_URL>
 ```
 
 Find (and use) the recipients preferred DM relay(s):
@@ -20,12 +21,14 @@ echo "hello world" | \
   privdm \
     --from sample.key \
     --to <RECIPIENT_NPROFILE> \
+    --cc <SENDERS_RELAY_URL>
 ```
 
 Notes:
 - Add `--verbose` to see more info.
-- Use `--dry-run` to find the recipients preferred DM relays but not send the message.
-- The `--via` option may be specified multiple times.
+- Use `--dry-run` to find the preferred DM relays but not send the message.
+- The `--via` option specifies recipient relays and may be specified multiple times.
+- The `--cc` option specifies sender relays and may be specified multiple times.
 
 ### Prerequisites
 
